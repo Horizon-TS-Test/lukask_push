@@ -2,4 +2,8 @@
 node_modules
 
 #omitimos credenciales
-config/
+config/lukask-realtime-db-key.json
+
+
+#omitimos credenciales key
+config/vapid-key.js
