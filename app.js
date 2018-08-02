@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
   //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', ['https://ec2-54-233-240-226.sa-east-1.compute.amazonaws.com:3001','http://192.168.1.20:4200']);
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Length, X-Requested-With, Content-Type, Accept, X-Access-Token');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS, PATCH');
 
