@@ -41,17 +41,18 @@ app.use(function(req, res, next) {
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
   //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
-  res.setHeader('Access-Control-Allow-Origin', ['https://ec2-54-233-240-226.sa-east-1.compute.amazonaws.com:3001','http://192.168.1.20:4200']);
+  //REF: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-nodejs
+  var allowedOrigins = ['https://ec2-54-233-240-226.sa-east-1.compute.amazonaws.com:3001','http://192.168.1.20:4200'];
+  var origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  ////
+
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Length, X-Requested-With, Content-Type, Accept, X-Access-Token');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS, PATCH');
 
-  //PREFLIGHT REQUEST HACKED:
-  //REF: https://vinaygopinath.me/blog/tech/enable-cors-with-pre-flight/
-  if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
+  next();
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
