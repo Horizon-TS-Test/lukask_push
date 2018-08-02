@@ -15,6 +15,7 @@ var keyPrefij = "pushId-";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 router.post('/', function (req, res, next) {
+    console.log("Entro al Subcribe");
     console.log(req.body);
     cors(req, res, function () {
         req.admin.database().ref('subscriptions').push(req.body.push_id)

@@ -40,8 +40,9 @@ app.use(function(req, res, next) {
 //////////////////////////////////////// ENABLE CORS: ////////////////////////////////////////////
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
-  //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
-  res.setHeader('Access-Control-Allow-Origin', '*');
+ console.log("Llegoooooooooooooooooo", req.method );
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:4200');
+  //res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Length, X-Requested-With, Content-Type, Accept, X-Access-Token');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS, PATCH');
 
