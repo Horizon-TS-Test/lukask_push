@@ -7,7 +7,9 @@ var logger = require('morgan');
 var subscribeRouter = require('./routes/subscribe');
 var notificationRouter = require('./routes/notification');
 
-var app = express();
+var app = express(
+    console.log("Se incio el servidor de notificaciones ENV = PRE")
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
