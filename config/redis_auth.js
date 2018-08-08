@@ -1,5 +1,5 @@
 module.exports = {
-    host: 'https://www.lukaksarticles.com',
+    host: 'http://18.228.96.233',
     port: 6379,
     password: 'sm@rtest7!'
 }
