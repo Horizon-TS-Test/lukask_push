@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 app.use(function (req, res, next) {
   //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
   //REF: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-nodejs
-  var allowedOrigins = ['https://www.lukaksarticles.com','http://127.0.0.1:4200'];
+  var allowedOrigins = ['https://midredis.lukaksarticles.com','http://127.0.0.1:4200'];
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin);
