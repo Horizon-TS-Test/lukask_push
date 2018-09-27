@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
   //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
   //REF: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-nodejs
-  var allowedOrigins = ['https://www.lukaksarticles.com','https://www.lukask.horizon-ts.com'];
+  var allowedOrigins = ['https://www.lukaksarticles.com','https://www.lukask.horizon-ts.com', 'https://horizon-ts.com'];
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin);
