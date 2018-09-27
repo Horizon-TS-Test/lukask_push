@@ -7,9 +7,7 @@ var logger = require('morgan');
 var subscribeRouter = require('./routes/subscribe');
 var notificationRouter = require('./routes/notification');
 
-var app = express(
-    console.log("Se incio el servidor de notificaciones ENV = PRE")
-);
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,28 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//////////////////FIREBASE CONNECTION:////////////////////////
-var admin = require('firebase-admin'); //FOR FIREBASE DATABASE ACCESS
-
-var serviceAccount = require("./config/lukask-realtime-db-key.json");
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://lukask-ba9b4.firebaseio.com"
-});
-
-app.use(function(req, res, next) {
-  req.admin = admin;
-  next();
-});
-//////////////////////////////////////////////////////////////
-
 //////////////////////////////////////// ENABLE CORS: ////////////////////////////////////////////
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
   //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
   //REF: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-nodejs
-  var allowedOrigins = ['https://www.lukaksarticles.com','http://127.0.0.1:4200','https://www.lukask.horizon-ts.com'];
+  var allowedOrigins = ['https://www.lukaksarticles.com','https://www.lukask.horizon-ts.com'];
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin);
