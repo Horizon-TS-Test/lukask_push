@@ -19,22 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//////////////////FIREBASE CONNECTION:////////////////////////
-var admin = require('firebase-admin'); //FOR FIREBASE DATABASE ACCESS
-
-var serviceAccount = require("./config/lukask-realtime-db-key.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://lukask-ba9b4.firebaseio.com"
-});
-
-app.use(function (req, res, next) {
-  req.admin = admin;
-  next();
-});
-//////////////////////////////////////////////////////////////
-
 //////////////////////////////////////// ENABLE CORS: ////////////////////////////////////////////
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
