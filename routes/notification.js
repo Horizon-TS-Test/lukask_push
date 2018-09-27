@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var cors = require('cors')({ origin: true });
 var webpush = require('web-push');
 
 var vapidKey = require('./../config/vapid-key');
@@ -10,42 +9,13 @@ var pushEmail = require('./../config/push-email');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- * ////////USED TO STORE SESSION INSIDE REDIS SERVER:////////
+ * ////////USED TO FETCH SUBSCRIPTION ID IN REDIS SERVER:////////
  */
 var redis = require('redis');
 var redisAuth = require('../config/redis_auth');
 var keyPrefij = "pushId-";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*router.post('/', function (req, res, next) {
-    cors(req, res, function () {
-        webpush.setVapidDetails('mailto:' + pushEmail.email, vapidKey.public_key, vapidKey.private_key);
-
-        req.admin.database().ref('subscriptions').once('value')
-            .then(function (subscriptions) {
-                subscriptions.forEach(function (sub) {
-                    let pushConfig = {
-                        endpoint: sub.val().endpoint,
-                        keys: {
-                            auth: sub.val().keys.auth,
-                            p256dh: sub.val().keys.p256dh
-                        }
-                    };
-
-                    webpush.sendNotification(pushConfig, JSON.stringify({
-                        title: req.body.title, content: req.body.content, open_url: req.body.open_url, actions: req.body.actions
-                    })).catch(function (err) {
-                        console.log(err);
-                    })
-                });
-                res.status(200).json({ message: "Successfully send push notifications to clients!" })
-            })
-            .catch(function (err) {
-                res.status(500).json({ message: err });
-            });
-    });
-});*/
 
 router.post('/', function (req, res, next) {
     let notifReceiver = req.body.receivers;

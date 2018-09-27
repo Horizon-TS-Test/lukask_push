@@ -7,9 +7,7 @@ var logger = require('morgan');
 var subscribeRouter = require('./routes/subscribe');
 var notificationRouter = require('./routes/notification');
 
-var app = express(
-  console.log("Se incio el servidor de notificaciones")
-);
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,11 +25,11 @@ var admin = require('firebase-admin'); //FOR FIREBASE DATABASE ACCESS
 var serviceAccount = require("./config/lukask-realtime-db-key.json");
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://lukask-ba9b4.firebaseio.com"
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://lukask-ba9b4.firebaseio.com"
 });
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   req.admin = admin;
   next();
 });
@@ -40,19 +38,19 @@ app.use(function(req, res, next) {
 //////////////////////////////////////// ENABLE CORS: ////////////////////////////////////////////
 //TO ENSURE OUR FRONT END CLIENT COULD REACH THIS MIDDLEWARE SERVER:
 app.use(function (req, res, next) {
- console.log("Llegoooooooooooooooooo", req.method );
-  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:4200');
-  //res.setHeader('Access-Control-Allow-Origin', '*');
+  //res.setHeader('Access-Control-Allow-Origin', servers.allow_origin);
+  //REF: https://stackoverflow.com/questions/24897801/enable-access-control-allow-origin-for-multiple-domains-in-nodejs
+  var allowedOrigins = ['http://192.168.1.62:3001', 'http://127.0.0.1:4200'];
+  var origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  ////
+
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Length, X-Requested-With, Content-Type, Accept, X-Access-Token');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, OPTIONS, PATCH');
 
-  //PREFLIGHT REQUEST HACKED:
-  //REF: https://vinaygopinath.me/blog/tech/enable-cors-with-pre-flight/
-  if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
+  next();
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
