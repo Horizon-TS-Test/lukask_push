@@ -37,8 +37,21 @@ app.use(function (req, res, next) {
   next();
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////
+app.use('isAuth', function(req,res,next){
+  if(!req.headers.authorization){
+    return res.status(403).send({message: ' No tiene autorizacion'})
+  }
+});
 
-app.use('/subscribe', subscribeRouter);
+const auth= require('./config/auth')
+
+app.get('/hola',auth.isAuth, (req, res)=>{
+  res.send(200, {products: 'holas'})
+})
+
+//app.use('/subscribe', subscribeRouter);
+
+
 app.use('/notification', notificationRouter);
 
 // catch 404 and forward to error handler

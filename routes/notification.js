@@ -11,7 +11,7 @@ var pushEmail = require('./../config/push-email');
 /**
  * ////////USED TO FETCH SUBSCRIPTION ID IN REDIS SERVER:////////
  */
-var redis = require('redis');
+var redis = require('redis'); 
 var redisAuth = require('../config/redis_auth');
 var keyPrefij = "pushId-";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
