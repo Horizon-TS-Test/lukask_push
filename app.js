@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var subscribeRouter = require('./routes/subscribe');
+var pubsubRouter = require('./routes/pubsub');
 var notificationRouter = require('./routes/notification');
 
 var app = express();
@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.use('/subscribe', subscribeRouter);
+app.use('/pubsub', pubsubRouter);
 app.use('/notification', notificationRouter);
 
 // catch 404 and forward to error handler
